@@ -1,44 +1,54 @@
-document.getElementById('encrypt-btn').addEventListener('click', function () {
-	const inputText = document.getElementById('input-text').value;
-	const encryptedText = encrypt(inputText);
-	displayResult(encryptedText);
-});
+const input = document.getElementById('input');
+const buttonEncriptar = document.getElementById('button-encriptar');
+const buttonDesencriptar = document.getElementById('button-desencriptar');
+const imagePerson = document.getElementById('img-person');
+const title = document.getElementById('title');
+const text = document.getElementById('text');
+const buttonCopiar = document.getElementById('button-copiar');
+const result = document.getElementById('result');
 
-document.getElementById('decrypt-btn').addEventListener('click', function () {
-	const inputText = document.getElementById('input-text').value;
-	const decryptedText = decrypt(inputText);
-	displayResult(decryptedText);
-});
+const encryptionRules = [
+	{ letter: 'e', replacement: 'enter' },
+	{ letter: 'i', replacement: 'imes' },
+	{ letter: 'a', replacement: 'ai' },
+	{ letter: 'o', replacement: 'ober' },
+	{ letter: 'u', replacement: 'ufat' },
+];
 
-document.getElementById('copy-btn').addEventListener('click', function () {
-	const outputText = document.getElementById('output-text');
-	outputText.select();
-	document.execCommand('copy');
-});
-
-function encrypt(text) {
-	return text
-		.replace(/e/g, 'enter')
-		.replace(/i/g, 'imes')
-		.replace(/a/g, 'ai')
-		.replace(/o/g, 'ober')
-		.replace(/u/g, 'ufat');
+function applyRules(text, rules) {
+	return rules.reduce(
+		(acc, rule) => acc.replaceAll(rule.letter, rule.replacement),
+		text.toLowerCase()
+	);
 }
 
-function decrypt(text) {
-	return text
-		.replace(/enter/g, 'e')
-		.replace(/imes/g, 'i')
-		.replace(/ai/g, 'a')
-		.replace(/ober/g, 'o')
-		.replace(/ufat/g, 'u');
+function encriptar() {
+	updateDisplay(applyRules(input.value, encryptionRules));
 }
 
-function displayResult(text) {
-	const placeholderImage = document.getElementById('placeholder-image');
-	const outputText = document.getElementById('output-text');
-
-	placeholderImage.style.display = 'none';
-	outputText.style.display = 'block';
-	outputText.value = text;
+function desencriptar() {
+	const decryptionRules = encryptionRules.map(({ letter, replacement }) => ({
+		letter: replacement,
+		replacement: letter,
+	}));
+	updateDisplay(applyRules(input.value, decryptionRules));
 }
+
+function updateDisplay(transformedText) {
+	imagePerson.hidden = true;
+	title.hidden = true;
+	text.hidden = true;
+	buttonCopiar.style.display = 'block';
+	result.innerText = transformedText;
+	result.hidden = false;
+	input.value = '';
+}
+
+function copy() {
+	navigator.clipboard.writeText(result.innerText);
+	input.value = '';
+}
+
+buttonEncriptar.addEventListener('click', encriptar);
+buttonDesencriptar.addEventListener('click', desencriptar);
+buttonCopiar.addEventListener('click', copiar);

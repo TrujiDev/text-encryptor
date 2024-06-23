@@ -4,14 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encriptador/Desencriptador de Texto</title>
     <link rel="stylesheet" href="style.css">
+    <title>Encriptador</title>
 </head>
 
 <body>
     <header>
-        <img src="assets/vector.png" alt="Logo de Alura">
+        <img src="assets/vector.png" />
     </header>
+    <main>
+        <section class="box-left">
+            <input type="text" placeholder="Ingrese el texto aquí" autocomplete="off" id="input">
+            <div>
+                <span><img src="assets/warning.png"> Solo letras minúsculas y sin acentos.</span>
+                <div class="button-group">
+                    <button type="submit" class="btn-blue" id="button-encriptar">Encriptar</button>
+                    <button type="submit" class="btn-white" id="button-desencriptar">Desencriptar</button>
+                </div>
+            </div>
+        </section>
+        <section class="box-right">
+            <img src="assets/muñeco.png" class="img-muñeco" id="img-person">
+            <h2 id="title">Ningún mensaje fue encontrado.</h2>
+            <p id="text">Ingresa el texto que desees encriptar o desencriptar.</p>
+            <h3 hidden id="result"></h3>
+            <button class="btn-blue" id="button-copiar" onclick="copy()">Copiar</button>
+        </section>
+    </main>
+    <footer>Eduar Trujillo - 2024 &copy;</footer>
+    <script src="main.js"></script>
 </body>
 
 </html>
