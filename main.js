@@ -1,10 +1,10 @@
 const input = document.getElementById('input');
-const buttonEncriptar = document.getElementById('button-encriptar');
-const buttonDesencriptar = document.getElementById('button-desencriptar');
+const buttonEncriptar = document.getElementById('button-encrypt');
+const buttonDesencriptar = document.getElementById('button-decrypt');
 const imagePerson = document.getElementById('img-person');
 const title = document.getElementById('title');
 const text = document.getElementById('text');
-const buttonCopiar = document.getElementById('button-copiar');
+const buttonCopiar = document.getElementById('button-copy');
 const result = document.getElementById('result');
 
 const encryptionRules = [
@@ -22,11 +22,11 @@ function applyRules(text, rules) {
 	);
 }
 
-function encriptar() {
+function encrypt() {
 	updateDisplay(applyRules(input.value, encryptionRules));
 }
 
-function desencriptar() {
+function decrypt() {
 	const decryptionRules = encryptionRules.map(({ letter, replacement }) => ({
 		letter: replacement,
 		replacement: letter,
@@ -49,6 +49,6 @@ function copy() {
 	input.value = '';
 }
 
-buttonEncriptar.addEventListener('click', encriptar);
-buttonDesencriptar.addEventListener('click', desencriptar);
-buttonCopiar.addEventListener('click', copiar);
+buttonEncriptar.addEventListener('click', encrypt);
+buttonDesencriptar.addEventListener('click', decrypt);
+buttonCopiar.addEventListener('click', copy);
